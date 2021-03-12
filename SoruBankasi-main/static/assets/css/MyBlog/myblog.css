@@ -1,0 +1,18 @@
+.Category_Name{
+    border: 1px solid #525252;
+    border-radius: 5px;
+    color:#313131;
+    cursor:pointer;
+    transition: 0.4s;
+    padding: 4px 2px;
+    position: relative;
+    padding-left: 10px;
+    margin-top: 5px;
+
+
+}
+.Category_Name:hover{
+    background-color: #313131;
+    color:white;
+
+}

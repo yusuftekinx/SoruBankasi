@@ -1,0 +1,80 @@
+{% extends 'AppTemplate/AppBase.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}
+        Blog Yazıları
+        {% endblock title %}
+    </title>
+</head>
+<body>
+    {% block content %}
+        <div class="container">
+            <div class = "row m-5">
+                <div class = "col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <span class = "h4">Blog Yaz</span>
+                  <hr>
+                </div>
+                {% if messages %}
+                  <ul class="messages">
+                      {% for message in messages %}
+                      <span class = "alert alert-success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+                      {% endfor %}
+                  </ul>
+                  {% endif %}
+                <div class = "col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                  <form class = "form-group" id = "NewBlogForm" action="{% url 'AddBlog' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                      <div class = "mt-3">
+                        <label for = "Image">Görsel</label>
+                        <input type = "file" accept="image/*" name = "image" class = "form-control" id = "Image">
+                      </div>
+                      <div class = "mt-3">
+                        <label for = "Title">Başlık*</label>
+                        <input class = "form-control" id = "Title" name = "title" required>
+                      </div>
+                      <div class = "mt-3">
+                        <label for = "Content">İçerik*</label>
+                        <textarea class = "form-control" id = "Content" name = "content" required></textarea>
+                      </div>
+                      <div class = "mt-3">
+                        <label for = "Tag">Kategori</label>
+                        
+                        {% if CategoryData %}
+                        <select class = "form-control" name = "category">
+                          {% for x in CategoryData %}
+                            <option value = "{{x.id}}">{{x.CategoryName}}</option>
+                          {% endfor %}
+                        </select>
+                        {% else %}
+                          <br>
+                          <span class ="">Henüz kategori oluşturmadınız.<a href = "{% url 'MyBlog' %}">Şimdi kategori oluşturun</a></span>
+                        {% endif %}
+
+                      </div>
+                      {% if CategoryData %}
+                        <input type = "submit" class = "btn btn-danger mt-2 float-right" value = "Oluştur">
+                      {% else %}
+                        <span class = "text-danger float-right">Öncelikle kategori oluşturun</span>
+                      {% endif %}
+
+                  </form>
+                </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <script src="{% static 'assets/js/jquery.js' %}"></script>
+        <script src="{% static  'assets/js/Blog/AddBlog.js' %}"></script>
+        <script src="{% static 'assets/js/sweetAlert.js' %}"></script>
+        
+
+    {% endblock content %}
+</body>
+</html>

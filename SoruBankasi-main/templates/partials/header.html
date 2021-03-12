@@ -1,0 +1,151 @@
+{% load static %}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <!--====== Title ======-->
+    <title>Edumate Education HTML Template</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="{% static 'image/png' %}">
+
+
+    <!-- CSS
+    ============================================ -->
+
+    <!--===== Vendor CSS (Bootstrap & Icon Font) =====-->
+
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/default.css' %}">
+
+
+    <!--===== Plugins CSS (All Plugins Files) =====-->
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'announcement/style.css' %}">
+
+    <!--====== Main Style CSS ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+
+    <!-- <link rel="stylesheet" href="assets/css/vendor/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css"> -->
+
+</head>
+
+<body>
+
+    <!--====== Header Start ======-->
+
+    <header class="header-area">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-wrapper d-flex flex-wrap justify-content-sm-between">
+                    <div class="header-top-left mt-10">
+                        <ul class="header-meta">
+                            <li><a href="mailto://infoedumate@example.com">infoedumate@example.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="header-top-right mt-10">
+                        <div class="header-link">
+                            <a class="notice" href="notice.html">Bize Ulaşın</a>
+                            <a class="login" href="login.html">Giriş Yap</a>
+                            <a class="register" href="register.html">Kayıt Ol</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="navigation" class="navigation navigation-landscape">
+            <div class="container position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <div class="header-logo">
+                            <a href="index.html"><img src="{% static 'assets/images/logo.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 position-static">
+                        <div class="nav-toggle"></div>
+                        <nav class="nav-menus-wrapper">
+                            <ul class="nav-menu">
+                                <li>
+                                    <a href="index.html">Ana Sayfa</a>
+                                </li>
+                                <li>
+                                    <a href="#">Sınava Hazırlık <br> Testleri</a>
+                                    <ul class="nav-dropdown nav-submenu">
+                                        <li><a href="">YKS</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a href="">TYT</a></li>
+                                            <li><a href="">AYT</a></li>
+                                            <li><a href="">YDT</a></li>
+                                        </ul>
+                                        </li>
+
+                                        <li><a href="">KPSS</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a href="">A GRUBU</a></li>
+                                            <li><a href="">B GRUBU</a></li>
+                                        </ul>
+                                        </li>
+                                        <li><a href="">TOEFL</a></li>
+                                        <li><a href="">IELTS</a></li>
+                                        <li><a href="">ALES</a></li>
+                                        <li><a href="">YDS</a></li>
+                                        <li><a href="">YÖKDİL</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Çıkmış Sınav <br> Soruları</a>
+                                    <ul class="nav-dropdown nav-submenu">
+                                        <li><a href="">YKS</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a href="">TYT</a></li>
+                                            <li><a href="">AYT</a></li>
+                                            <li><a href="">YDT</a></li>
+                                        </ul>
+                                        </li>
+
+                                        <li><a href="">KPSS</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a href="">A GRUBU</a></li>
+                                            <li><a href="">B GRUBU</a></li>
+                                        </ul>
+                                        </li>
+                                        <li><a href="">TOEFL</a></li>
+                                        <li><a href="">IELTS</a></li>
+                                        <li><a href="">ALES</a></li>
+                                        <li><a href="">YDS</a></li>
+                                        <li><a href="">YÖKDİL</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="">Taban Puanlar</a></li>
+                                <li><a href="">Puan Hesapla</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-2 position-static">
+                        <div class="header-search">
+                            <form action="#">
+                                <input type="text" placeholder="Arama Yap">
+                                <button><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--====== Header Ends ======-->

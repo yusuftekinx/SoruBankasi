@@ -1,0 +1,53 @@
+.sidenav {
+
+  width: 200px;
+  height:50%;
+  position: fixed;
+  z-index: 1;
+  top: 250px;
+  right: 15px;
+  background-color: #343a40;
+  overflow-x: hidden;
+  padding-top: 20px;
+  border-radius: 6px;
+  padding-right: 5px;
+  padding-left: 10px;
+
+}
+
+.sidenav a {
+  padding: 4px 8px;
+  margin: 3px;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+}
+
+.sidenav a:hover {
+  color:white;
+}
+
+.main {
+  font-size: 28px; /* Increased text to enable scrolling */
+  width:80%;
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 16px;}
+}
+
+
+#SideBarText{
+  color:white;
+}
+
+#SinavTuru{
+  background-color: #343a40;
+  border: 1px solid #343a40;
+  color:white;
+}
+#SinavTuru::after{
+  color:red;
+}

@@ -1,0 +1,300 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}
+    {% endblock title %}</title>
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="{% static 'image/png' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/default.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'announcement/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+
+    <!-- <link rel="stylesheet" href="assets/css/vendor/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css"> -->
+
+</head>
+<body>
+<header class="header-area">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-wrapper d-flex flex-wrap justify-content-sm-between">
+                    <div class="header-top-left mt-10">
+                        <ul class="header-meta">
+                            <li><a href="mailto://infoedumate@example.com">infoedumate@example.com</a></li>
+                        </ul>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                        <span class = "text-light mt-3">{{request.user.username}} • <a href = "{% url 'home' %}" class = "btn btn-dark" title = "Uygulamaya Git"><i class="fas fa-home"></i></a> • <a href= "{% url 'logout' %}"  class = "btn btn-dark" title = "Çıkış Yap"><i class="fas fa-sign-out-alt"></i></a></span>
+                    
+                    {% else %}
+                    <div class="header-top-right mt-10">
+                        <div class="header-link">
+                            <a class="notice" href="notice.html">Bize Ulaşın</a>
+                            <a class="login" href="{% url 'login' %}">Giriş Yap</a>
+                            <a class="register" href="{% url 'register' %}">Kayıt Ol</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div id="navigation" class="navigation navigation-landscape">
+            <div class="container position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <div class="header-logo">
+                            <a href="index.html"><img src="{% static 'assets/images/logo.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 position-static">
+                        <div class="nav-toggle"></div>
+                        <nav class="nav-menus-wrapper">
+                            <ul class="nav-menu">
+                                <li>
+                                    <a href="index.html">Ana Sayfa</a>
+                                </li>
+                                <li>
+                                    <a href="#">Sınava Hazırlık <br> Testleri</a>
+                                    <ul class="nav-dropdown nav-submenu">
+                                        <li><a href="">YKS</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a href="">TYT</a></li>
+                                            <li><a href="">AYT</a></li>
+                                            <li><a href="">YDT</a></li>
+                                        </ul>
+                                        </li>
+
+                                        <li><a href="">KPSS</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a href="">A GRUBU</a></li>
+                                            <li><a href="">B GRUBU</a></li>
+                                        </ul>
+                                        </li>
+                                        <li><a href="">TOEFL</a></li>
+                                        <li><a href="">IELTS</a></li>
+                                        <li><a href="">ALES</a></li>
+                                        <li><a href="">YDS</a></li>
+                                        <li><a href="">YÖKDİL</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Çıkmış Sınav <br> Soruları</a>
+                                    <ul class="nav-dropdown nav-submenu">
+                                        <li><a href="">YKS</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a href="">TYT</a></li>
+                                            <li><a href="">AYT</a></li>
+                                            <li><a href="">YDT</a></li>
+                                        </ul>
+                                        </li>
+
+                                        <li><a href="">KPSS</a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                            <li><a href="">A GRUBU</a></li>
+                                            <li><a href="">B GRUBU</a></li>
+                                        </ul>
+                                        </li>
+                                        <li><a href="">TOEFL</a></li>
+                                        <li><a href="">IELTS</a></li>
+                                        <li><a href="">ALES</a></li>
+                                        <li><a href="">YDS</a></li>
+                                        <li><a href="">YÖKDİL</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="">Taban Puanlar</a></li>
+                                <li><a href="">Puan Hesapla</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-2 position-static">
+                        <div class="header-search">
+                            <form action="#">
+                                <input type="text" placeholder="Arama Yap">
+                                <button><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% block content %}
+
+{% endblock content %}
+
+
+<!-- FOOTER -->
+
+<section class="newsletter-area">
+        <div class="container">
+            <div class="newsletter-wrapper bg_cover wow zoomIn" data-wow-duration="1s" data-wow-delay="0.2s" style="background-image: url(assets/images/newsletter-bg-1.jpg);">
+                <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="single-contact-info mt-30">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5 class="title">Address</h5>
+                            <p>297 Central Street, New Town North City, New York, USA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-contact-info mt-30">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5 class="title">Phone</h5>
+                            <p><a href="tel:+62548254658">+62548 254 658</a></p>
+                            <p><a href="tel:+99875587478">+99875 587 478</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-contact-info mt-30">
+                        <div class="info-icon">
+                            <i class="far fa-globe"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5 class="title">Web</h5>
+                            <p><a href="mailto://info@example.com">info@example.com</a></p>
+                            <p><a href="www.example.com">www.example.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== Newsletter Ends ======-->
+
+    <!--====== Footer Start ======-->
+
+    <section class="footer-area bg_cover" style="background-image: url(assets/images/counter-bg.jpg); text-align: center;">
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <h4 class="footer-title">Site Haritası</h4>
+                            <ul class="link-list">
+                                <li><a href="#">Sınava Hazırlık Testleri</a></li>
+                                <li><a href="#">Çıkmış Sınav Soruları</a></li>
+                                <li><a href="#">Taban Puanlar</a></li>
+                                <li><a href="#">Puan Hesapla</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <h4 class="footer-title">Bilgilendirme</h4>
+                            <ul class="link-list">
+                                <li><a href="#">Duyurular</a></li>
+                                <li><a href="#">Blog Sayfası</a></li>
+                                <li><a href="#">Öğretmenler</a></li>
+                                <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <h4 class="footer-title">Faydalı Linkler</h4>
+                            <ul class="link-list">
+                                <li><a href="#">ÖSYM</a></li>
+                                <li><a href="#">ÖSYM Aday İşlemleri</a></li>
+                                <li><a href="#">E-Devlet Kapısı</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <h4 class="footer-title">Sosyal Medya</h4>
+                            <ul class="link-list">
+                                <li><a href="#">İnstagram</a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Linkedin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="copyright text-center">
+                    <p>2021 &copy; Copyright. Tüm hakları saklıdır. <a href="#">Edumate | Education for All</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== Footer Ends ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="fal fa-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== Start ======-->
+
+<!--
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-">
+
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+
+    <!--====== Ends ======-->
+
+
+
+
+    <!--====== Jquery js ======-->
+    <script src="{% static 'assets/js/home/home.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/modernizr-3.7.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/slick.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.appear.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/ajax-contact.js' %}"></script>
+    <script  src="{% static 'announcement/script.js' %}"></script>
+
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+
+    <!-- <script src="assets/js/plugin.min.js"></script> -->
+
+
+    <!--====== Main Activation  js ======-->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+</body>
+</html>

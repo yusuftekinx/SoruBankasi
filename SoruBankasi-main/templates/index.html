@@ -1,0 +1,603 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}
+        Anasayfa
+        {% endblock title %}
+    </title>
+</head>
+<body>
+{% block content %}
+
+    <!--====== Slider Start ======-->
+
+    <section class="slider-area slider-active">
+        <div class="single-slider d-flex align-items-center bg_cover" style="background-image: url({% static 'assets/images/Bertrand-Russell-Archives021_jpg-3-1920x820.png' %});">
+            <div class="container">
+                <div class="slider-content">
+                    <h2 class="title" data-animation="fadeInLeft" data-delay="0.2s">Education is the most powerful Weapon</h2>
+                    <ul class="slider-btn">
+                        <li><a data-animation="fadeInUp" data-delay="0.6s" class="main-btn main-btn-2" href="our-courses-left-sidebar.html">View Courses</a></li>
+                        <li><a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Learn more</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="single-slider d-flex align-items-center bg_cover" style="background-image: url({% static 'assets/images/after-high-school-1920x820.jpg' %});">
+            <div class="container">
+                <div class="slider-content">
+                    <h2 class="title" data-animation="fadeInLeft" data-delay="0.2s">Education is the most powerful Weapon</h2>
+                    <ul class="slider-btn">
+                        <li><a data-animation="fadeInUp" data-delay="0.6s" class="main-btn main-btn-2" href="our-courses-left-sidebar.html">View Courses</a></li>
+                        <li><a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Learn more</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="single-slider d-flex align-items-center bg_cover" style="background-image: url({% static 'assets/images/Books-1920x820.jpeg' %});">
+            <div class="container">
+                <div class="slider-content">
+                    <h2 class="title" data-animation="fadeInLeft" data-delay="0.2s">Education is the most powerful Weapon</h2>
+                    <ul class="slider-btn">
+                        <li><a data-animation="fadeInUp" data-delay="0.6s" class="main-btn main-btn-2" href="our-courses-left-sidebar.html">View Courses</a></li>
+                        <li><a data-animation="fadeInUp" data-delay="1s" class="main-btn" href="#">Learn more</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== Slider Ends ======-->
+
+    <!-- partial:index.partial.html -->
+    <div class="marquee">
+        <ul>
+            {% for data in notices %}
+                <li><a style="color: white" href="#" title="#">{{data.NoticeTitle}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+<!-- partial -->
+
+
+    <!-- partial:announcement.partial.html
+
+    <div class="announcement-counter-area">
+        <div class="container">
+            <div class="announcement-counter-wrapper bg_cover">
+                <div class="announcements-container">
+                    <div class="container-title">Duyurular</div>
+                        <ul class="announcements">
+                            <li><a href="#" title="#">Jekyll search using Google’s Custom Search Engine and jQuery. @2017-11-15T15:54:27+00:00.</a></li>
+                            <li><a href="#" title="#">Creating and integrating Spotify’s Now playing track to Open Broadcaster Software (OBS) using C#. @2017-10-23T22:09:27+00:00.</a></li>
+                            <li><a href="#" title="#">Creating and Implementing a beginner friendly scroll-to-top button for your website. @2017-10-17T05:05:27+00:00.</a></li>
+                            <li><a href="#" title="#">CSS Pseudo classes manipulation using jQuery. @2017-10-12T12:21:27+00:00.</a></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ partial -->
+
+
+    <!--====== Top Courses Start ======-->
+
+
+    <section class="top-courses-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title mt-40">
+                        <h2 class="title">Sınava Hazırlık <br> Deneme Testi</h2>
+                        <p>Konuları kaçırdım, eksik kaldım diye düşünme! Hemen test çözmeye başla!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="courses-menu pt-40 text-center">
+                        <ul class="menu-items">
+                            {% csrf_token %}
+                            <li onclick="GetExamData('all');">Tümü</li>
+                            <li onclick="GetExamData('tyt');">TYT</li>
+                            <li onclick="GetExamData('ayt');">AYT</li>
+                            <li onclick="GetExamData('ydt');">YDT</li>
+                            <!--<li data-filter=".literature">Literature</li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-wrapper">
+                <div id="filter-div">
+                </div>
+                <div class="row"  id = "AllData">
+                    {% for categories in categoriess %}
+                    <div class="col-lg-3 col-sm-6 courses-col">
+                        <div class="single-courses-2 mt-30"  onclick="AltMenu('{{categories.id}}','{{categories.exams_id}}');" data-toggle="modal" data-target=".LessonCard{{categories.id}}">
+                            <div class="courses-image" >
+                                {% if categories.image %}
+                                    <img src="{{categories.image.url}}" alt="courses">
+                                {% else %}
+                                    <p>Resim Yok</p>
+                                {% endif %}
+                            </div>
+                            <div class="courses-content">
+                                <a href="#" class="category">{{ categories.exams }}</a>
+                                
+                                {% csrf_token %}
+                                
+                                <h4 class="courses-title"><a>{{ categories.ders }}</a></h4>
+                                
+                               
+                                <div class="duration-rating">
+                                    <div class="duration-fee">
+                                        <p class="duration">Duration: <span> 4 year</span> • Fee: <span> $540</span></p>
+                                    </div>
+                                    <div class="rating">
+                                        <span>Rating: </span>
+                                        <ul class="star">
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="courses-link">
+                                    <a class="apply" href="#">Online Apply</a>
+                                    <a class="more" href="#">Read more <i class="fal fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== Top Courses Ends ======-->
+
+        <section class="about-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="about-content mt-40">
+                        <h2 class="about-title">Test Sonuçlarına Göre Hemen <span>Puanını Hesapla!</span></h2>
+                        <span class="line"></span>
+                        <p>Even slightly believable. If you are going use passage of Lorem Ipsum need desire to obtain pain of itself, because it is pain de sires many pain of itself occur for your study <br> <br> Even slightly believable. If you are going use passage of Lorem Ipsum need desir</p>
+                        <a href="#" class="main-btn">Hesapla!</a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="about-image mt-50">
+                        <div class="single-image image-1">
+                            <img src="{% static 'assets/images/about/about-1.jpg' %}" alt="">
+                        </div>
+                        <div class="single-image image-2">
+                            <img src="{% static 'assets/images/about/about-2.jpg' %}" alt="">
+                        </div>
+                        <div class="single-image image-3">
+                            <img src="{% static 'assets/images/about/about-3.jpg' %}" alt="">
+                        </div>
+                        <div class="single-image image-4">
+                            <img src="{% static 'assets/images/about/about-4.jpg' %}" alt="">
+                        </div>
+
+                        <div class="about-icon icon-1">
+                            <img src="{% static 'assets/images/about/icon/icon-1.png' %}" alt="">
+                        </div>
+                        <div class="about-icon icon-2">
+                            <img src="{% static 'assets/images/about/icon/icon-2.png' %}" alt="">
+                        </div>
+                        <div class="about-icon icon-3">
+                            <img src="{% static 'assets/images/about/icon/icon-3.png' %}" alt="">
+                        </div>
+                        <div class="about-icon icon-4">
+                            <img src="{% static 'assets/images/about/icon/icon-4.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--====== Event Start ======-->
+
+    <section class="event-area">
+        <div class="container">
+            <div class="event-title-tab-menu">
+                <div class="event-title mt-40">
+                    <h2 class="title">Çıkmış Sınav <br> Soruları</h2>
+                </div>
+
+                <div class="event-tab-menu mt-40">
+                    <ul class="nav">
+                        <li>
+                            <a class="active" data-toggle="tab" href="#courses">TYT</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#admission">AYT</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#training">YDT</a>
+                        </li>
+                        </ul>
+                </div>
+            </div>
+            <div class="tab-content event-tab-items wow fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.2s">
+                <div class="tab-pane fade show active" id="courses">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="admission">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="training">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-event text-center mt-30">
+                                <span class="time">10.35 am to 1.00 pm</span>
+                                <span class="date">25 May, 2020</span>
+                                <h4 class="event-title"><a href="event-details.html">Micro Biological Workshop</a></h4>
+                                <p class="place">Place: Central Hall, New York</p>
+                                <a href="#" class="more">Read more <i class="far fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view-btn text-center">
+                    <a href="#" class="view-more">View More <i class="fal fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== Event Ends ======-->
+
+        <!--====== Teachers Start ======-->
+
+    <section class="teachers-page">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-9">
+                    <div class="section-title-2 text-center">
+                        <h2 class="title">Öğretmenlerimiz</h2>
+                        <span class="line"></span>
+                        <p>Deneyimli eğitimcilerin sorularını çözün. Öğretmenlere hemen göz atın.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row teachers-row">
+                <div class="col-md-4 col-sm-6 teachers-col">
+                    <div class="single-teacher mt-80 text-center">
+                        <div class="teacher-social">
+                            <ul class="social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="teacher-image">
+                            <a href="teacher-details.html">
+                                <img src="{% static 'assets/images/teachers/teacher-1.jpg' %}" alt="teacher">
+                            </a>
+                        </div>
+                        <div class="teacher-content">
+                            <h4 class="name"><a href="teacher-details.html">Roberto Carlos</a></h4>
+                            <span class="designation">Science Lecturor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 teachers-col">
+                    <div class="single-teacher mt-80 text-center">
+                        <div class="teacher-social">
+                            <ul class="social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="teacher-image">
+                                <a href="teacher-details.html">
+                                <img src="{% static 'assets/images/teachers/teacher-2.jpg' %}" alt="teacher">
+                            </a>
+                        </div>
+                        <div class="teacher-content">
+                            <h4 class="name"><a href="teacher-details.html">Roberto Carlos</a></h4>
+                            <span class="designation">Science Lecturor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 teachers-col">
+                    <div class="single-teacher mt-80 text-center">
+                        <div class="teacher-social">
+                            <ul class="social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="teacher-image">
+                                <a href="teacher-details.html">
+                                <img src="{% static 'assets/images/teachers/teacher-3.jpg' %}" alt="teacher">
+                            </a>
+                        </div>
+                        <div class="teacher-content">
+                            <h4 class="name"><a href="teacher-details.html">Roberto Carlos</a></h4>
+                            <span class="designation">Science Lecturor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 teachers-col">
+                    <div class="single-teacher mt-80 text-center">
+                        <div class="teacher-social">
+                            <ul class="social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="teacher-image">
+                                <a href="teacher-details.html">
+                                <img src="{% static 'assets/images/teachers/teacher-4.jpg' %}" alt="teacher">
+                            </a>
+                        </div>
+                        <div class="teacher-content">
+                            <h4 class="name"><a href="teacher-details.html">Alex Fargunes</a></h4>
+                            <span class="designation">Chemistry Professor </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 teachers-col">
+                    <div class="single-teacher mt-80 text-center">
+                        <div class="teacher-social">
+                            <ul class="social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="teacher-image">
+                                <a href="teacher-details.html">
+                                <img src="{% static 'assets/images/teachers/teacher-5.jpg' %}" alt="teacher">
+                            </a>
+                        </div>
+                        <div class="teacher-content">
+                            <h4 class="name"><a href="teacher-details.html">Rehana Smith</a></h4>
+                            <span class="designation">Lecturer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 teachers-col">
+                    <div class="single-teacher mt-80 text-center">
+                        <div class="teacher-social">
+                            <ul class="social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="teacher-image">
+                                <a href="teacher-details.html">
+                                <img src="{% static 'assets/images/teachers/teacher-6.jpg' %}" alt="teacher">
+                            </a>
+                        </div>
+                        <div class="teacher-content">
+                            <h4 class="name"><a href="teacher-details.html">Julia Williams</a></h4>
+                            <span class="designation">Science Lecturor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="pagination-items text-center">
+                <li><a class="active" href="#">01</a></li>
+                <li><a href="#">02</a></li>
+                <li><a href="#">03</a></li>
+                <li><a href="#">04</a></li>
+                <li><a href="#">05</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!--====== Teachers Ends ======-->
+
+    <!--====== Blog Start ======-->
+
+    <section class="blog-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-9">
+                    <div class="section-title-2 text-center">
+                        <h2 class="title">Rehber Yazılar</h2>
+                        <span class="line"></span>
+                        <p>Sizlere en iyi şekilde yardımcı olabilmek için buradayız. Rehber yazılara hemen göz atın.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-wrapper">
+                <div class="row blog-active">
+                    <div class="col-lg-4">
+                        <div class="single-blog mt-30">
+                            <div class="blog-image">
+                                <a href="blog-details.html">
+                                    <img src="{% static 'assets/images/blog-1.jpg' %}" alt="blog">
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <ul class="meta">
+                                    <li><a href="#">25 May, 2020</a></li>
+                                    <li><a href="#">By: Alex</a></li>
+                                    <li><a href="#">12 Comments</a></li>
+                                </ul>
+                                <h4 class="blog-title"><a href="blog-details.html">Latest Micro Biological basic Workshop for Research</a></h4>
+                                <a href="blog-details.html" class="more">Read more <i class="fal fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-blog mt-30">
+                            <div class="blog-image">
+                                <a href="blog-details.html">
+                                    <img src="{% static 'assets/images/blog-2.jpg' %}" alt="blog">
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <ul class="meta">
+                                    <li><a href="#">25 May, 2020</a></li>
+                                    <li><a href="#">By: Alex</a></li>
+                                    <li><a href="#">12 Comments</a></li>
+                                </ul>
+                                <h4 class="blog-title"><a href="blog-details.html">Latest Micro Biological basic Workshop for Research</a></h4>
+                                <a href="blog-details.html" class="more">Read more <i class="fal fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-blog mt-30">
+                            <div class="blog-image">
+                                <a href="blog-details.html">
+                                    <img src="{% static 'assets/images/blog-3.jpg' %}" alt="blog">
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <ul class="meta">
+                                    <li><a href="#">25 May, 2020</a></li>
+                                    <li><a href="#">By: Alex</a></li>
+                                    <li><a href="#">12 Comments</a></li>
+                                </ul>
+                                <h4 class="blog-title"><a href="blog-details.html">Latest Micro Biological basic Workshop for Research</a></h4>
+                                <a href="blog-details.html" class="more">Read more <i class="fal fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="pagination-items text-center">
+                <li><a class="active" href="#">01</a></li>
+                <li><a href="#">02</a></li>
+                <li><a href="#">03</a></li>
+                <li><a href="#">04</a></li>
+                <li><a href="#">05</a></li>
+            </ul>
+        </div>
+    </section>
+    <script src= "{% static 'assets/js/home/home.js' %}"></script>
+{% endblock content %}
+</body>
+</html>

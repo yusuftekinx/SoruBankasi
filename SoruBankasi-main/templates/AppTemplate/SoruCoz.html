@@ -1,0 +1,123 @@
+{% extends 'AppTemplate/AppBase.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Document</title>
+  </head>
+  <body>
+    {% block content %}
+    <div class="container pl-5 pt-3">
+      <form id="TestOlustur">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-3">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Sınav Türü Seç</label>
+
+              <select
+                class="form-control"
+                id="SinavTuru"
+                onclick="SınavSecimi();"
+              >
+                <option>Sınav Türü Seç</option>
+                {% if examdata %} {% for data in examdata %}
+                <option value="{{data.examname}}" id="{{data.id}}">
+                  {{data.examname}}
+                </option>
+                {% endfor %} {% else %}
+                <option>Sınav Türü Seç</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-3">
+            <div class="form-group">
+              <label>Ders Seç</label>
+              <div id="NewSelect"></div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-3">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Konu Seç</label>
+              <div id="NewSelect2"></div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-2">
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Uzunluk</label>
+              <select class="form-control" id="TestUzunluk">
+                <option value="10">10 Soru</option>
+                <option value="20">20 Soru</option>
+                <option value="30">30 Soru</option>
+                <option value="40">40 Soru</option>
+                <option value="50">50 Soru</option>
+                
+              </select>
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-1"
+            style="margin-top: 31px"
+          >
+            <div class="form-group">
+              <button
+                type="submit"
+                class="btn form-control bg-dark h6"
+                id = "SubmitButton"
+              >Uygula</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <hr />
+      <!-- Test Alanı -->
+    <div class="main" id = "YeniTest" style="display: none;">
+    </div>
+    
+
+    </div>
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/sweetAlert.js' %}"></script>
+    <script src="{% static 'assets/js/EasyTimer/easytimer.js' %}"></script>
+    <script src="{% static 'assets/js/EasyTimer/easytimer.min.js' %}"></script>
+    <script src="{% static 'assets/js/EasyTimer/examples.min.js' %}"></script>
+    <script src="{% static 'assets/js/SoruCoz/SoruCoz.js' %}"></script>
+
+    {% endblock content %}
+  </body>
+</html>
+
+<!--
+    <div class="card mx-auto">
+                    <div class="card-header">
+                      <img src="#" />
+                    </div>
+                    <div class="card-body">
+                      <p>Aşağıdakilerden hangisi bir temel büyüklüktür?</p>
+                      <label class="container">
+                        <input type="radio" checked="checked" name="radio" />
+                        Sürat
+                      </label>
+                      <label class="container">
+                        <input type="radio" name="radio" />
+                        Hız
+                      </label>
+                      <label class="container">
+                        <input type="radio" name="radio" />
+                        Kütle
+                      </label>
+                      <label class="container">
+                        <input type="radio" name="radio" />
+                        Ağırlık
+                      </label>
+                      <label class="container">
+                        <input type="radio" name="radio" />
+                        İvme
+                      </label>
+                    </div>
+                  </div>
+-->

@@ -1,0 +1,79 @@
+{% extends 'AppTemplate/AppBase.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}
+        Bloğunuz
+        {% endblock title %}
+    </title>
+</head>
+<body>
+
+    {% block content %}
+    <div class="container">
+        <div class = "row m-5">
+            <div class = "col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <span class = "h4">Kategoriler</span>
+                <span class = "float-right"><button class = "btn btn-dark" title = "Yeni Kategori Oluştur" data-toggle="modal" data-target="#NewCategory"><i class = "fas fa-plus"></i></button></span>
+              <hr>
+              <small class = "text-secondary">Blog yazılarınız, oluşturduğunuz kategorilere göre düzenlenmiştir.</small>
+            </div>
+            
+            </div>
+            <div class = "row m-5">
+                <div class = "col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+                        <h5>Kategoriye ait yazılar</h5>
+                </div>
+                <div class = "col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                        <h6>Size Ait Kategoriler</h6>
+                        <hr>
+                        
+                    {% if data %}
+                    {% for x in data %}
+                        <div class = "Category_Name"  onclick="CategoryDataFilter('{{request.user.username}}','{{x.id}}');" >{{x.CategoryName}}</div>
+                    {% endfor %}
+                    {% else %}
+
+                    {% endif %}
+                    <div id = "NewCategoryDiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal-->
+    <div class="modal fade" id="NewCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Yeni Kategori Oluştur</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form class = "form-group" id = "CreateCategoryForm">
+                    {% csrf_token %}
+                  <div class = "input-group">
+                    <input  class = "form-control" maxlength="10" autocomplete="off" id = "CategoryName" required minlength="3" placeholder="Kategori Adı">
+                  </div>
+                  <div>
+                    <input type="submit" class="btn btn-dark float-right mt-3" required value = "Oluştur">
+                  </div>
+
+                </form>                
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <script src="{% static 'assets/js/jquery.js' %}"></script>
+      <script src="{% static 'assets/js/sweetAlert.js' %}"></script>
+      <script src =  "{% static 'assets/js/MyBlog/myblog.js' %}"></script>
+    {% endblock content %}
+    
+</body>
+</html>
