@@ -1,0 +1,13 @@
+
+body{
+    background-color: #435560;
+}
+#QuestionMap{
+    border-radius: 6px;
+    padding-top:15px;
+    padding-bottom:30px;
+}
+#questionNumber{
+    display:flex;
+    margin-left: 20px;
+}

@@ -1,38 +1,69 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{% static 'assets/css/EasyTimer/examples.min.css' %}" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/QuestionPage/QuestionPage.css' %}">
 
-  <style>
-    #Top{
-      margin-top: 80px;
-    }
-    #basicUsage{
-      position: absolute;
-      right: 80px;
-      top: 120px;
-    }
-    .affix {
-    top: 20px;
-    z-index: 9999 !important;
-    width:25%;
-  }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div id = "Top">
-      <span class = "h1">Test Adı</span>
-      <span id="basicUsage">00:00:00</span>
+    <style>
+      #Top {
+        margin-top: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="Top">
+        <span class="h1 ms-5 text-light">Test Adı</span>
+        <hr class = "border-dark" />
+        <div class = "row">
+          <div class= "col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class = "position-sticky sticky-top text-light" id = "QuestionMap">
+              <a href = "" id = "questionNumber">Soru 1</a>
+              <a href = "" id = "questionNumber">Soru 2</a>
+              <a href = "" id = "questionNumber">Soru 3</a>
+              <a href = "" id = "questionNumber">Soru 4</a>
+              <a href = "" id = "questionNumber">Soru 5</a>
+              <a href = "" id = "questionNumber">Soru 6</a>
+              <a href = "" id = "questionNumber">Soru 7</a>
+              <a href = "" id = "questionNumber">Soru 9</a>
+              <a href = "" id = "questionNumber">Soru 10</a>
+              <a href = "" id = "questionNumber">Soru 11</a>
+              <a href = "" id = "questionNumber">Soru 12</a>
+              <a href = "" id = "questionNumber">Soru 13</a>
+              <a href = "" id = "questionNumber">Soru 14</a>
+              <a href = "" id = "questionNumber">Soru 15</a>
+              <hr>
+              <span class = "ms-4"><b><span id="basicUsage">00:00:00</span></b></span>
+              
+
+          </div>
+          </div>
+          <div class= "col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+            {% for i in data %}
+              <h1>{{data.i}}</h1>
+            {% endfor %}
+            
+          </div>
+        </div>
+        
+      </div>
     </div>
-    <hr>
-      <div class="row">
-        <nav class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'assets/js/TimerLib/examples.min.js' %}"></script>
+  </body>
+</html>
+
+
+<!--
+
+
+  <nav class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+          
           <ul class="nav navbar-dark" data-spy="affix" data-offset-top="205">
             <li class="active"><a href="#section1">Soru 1</a></li>
             <li><a href="#section2">Soru 2</a></li>
@@ -58,12 +89,4 @@
           <h1>Some text to enable scrolling</h1>
           <h1>Some text to enable scrolling</h1>
         </div>
-      </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="{% static 'assets/js/EasyTimer/easytimer.js' %}"></script>
-<script src="{% static 'assets/js/EasyTimer/easytimer.min.js' %}"></script>
-<script src="{% static 'assets/js/EasyTimer/examples.min.js' %}"></script>
-</body>
-</html>
+-->

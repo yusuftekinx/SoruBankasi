@@ -1,10 +1,8 @@
 
 
-
 var ExamSelect = document.getElementById('SinavTuru')
 var NewSelect = document.getElementById('NewSelect')
 var NewSelect2 = document.getElementById('NewSelect2')
-
 function SınavSecimi(){
     $.ajax({
         type: 'POST',
@@ -24,6 +22,7 @@ function SınavSecimi(){
             select.setAttribute('class','form-control')
             select.setAttribute('id','DersTuru')
             select.setAttribute('onchange','DersSecimi();')
+            select.setAttribute('name','Ders')
             var staticOption =  document.createElement('option')
             staticOption.innerHTML = "Ders Seç"
             select.appendChild(staticOption)
@@ -66,6 +65,8 @@ function DersSecimi(){
             var select = document.createElement('select')
             select.setAttribute('class','form-control')
             select.setAttribute('id','KonuTuru')
+            select.setAttribute('name','Konu')
+
             var staticOption2 = document.createElement('option')
             staticOption2.innerHTML = "Konu Seç"
             select.appendChild(staticOption2)
@@ -84,7 +85,7 @@ function DersSecimi(){
     })
 }
 
-
+/*
 var TestOlustur = document.getElementById('TestOlustur')
 var YeniTest = $('#YeniTest');
 var SubmitButton = document.getElementById('SubmitButton')
@@ -106,7 +107,18 @@ TestOlustur.addEventListener('submit',function(e){
     }
     else{
         SubmitButton.innerHTML = "<div class = 'spinner-border spinner-border-sm' role = 'status'><span class = 'sr-only'>Loading ...</span></div>"
-        $.ajax({
+        
+        setTimeout(function(){
+            SubmitButton.innerHTML = "Uygula"
+            swal({
+                title:'Başarılı',
+                text: "Lütfen bekle,seni test sayfasına yönlendiriyoruz",
+                icon: "success",
+                button: "Tamam",
+            })
+        },3000)
+        
+        /*$.ajax({
             type: 'POST',
             url : '/solveQuestion/',
             data:{
@@ -117,6 +129,10 @@ TestOlustur.addEventListener('submit',function(e){
                 type:'CreateExam',
                 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
             },success:function(data){
+
+                var sn = 0;
+                var dk = 0;
+
                 SubmitButton.innerHTML = "Uygula"
                 ParseQuestionData = JSON.parse(data)
                 if(ParseQuestionData.length > 0){
@@ -131,12 +147,48 @@ TestOlustur.addEventListener('submit',function(e){
                         sidebarDiv.remove()
                     }
 
+                    // SideBar
+                    var SideBarDiv = document.createElement('div')
+                    SideBarDiv.setAttribute('class','sidenav')
+                    SideBarDiv.setAttribute('id','sidebarDiv')
+                    
+                    
+                    var TimeText = document.createElement('div')
+                    TimeText.setAttribute('id','basicUsage')
+                    TimeText.setAttribute('class','text-light')
+                    TimeText.innerHTML = "00:00:00"
+                    
+
+                    SideBarDiv.appendChild(TimeText)
+
+
+                    for(var a = 1;a< ParseQuestionData.length;a++){
+                        var pagelink = document.createElement('a')
+                        pagelink.setAttribute('href','#soru'+a)
+                        pagelink.innerHTML= a
+                        pagelink.setAttribute('title',a+". Soru'ya Git")
+                        
+                            if((a-1)%5 == 0){
+                                var AddBr = document.createElement('br')
+                                SideBarDiv.appendChild(AddBr)
+                            }
+                        
+
+                        SideBarDiv.appendChild(pagelink)
+
+                        
+
+                        // TODO Scroll Animate Eklencek
+                    }
+
+
+
 
 
                     var TestIcerigi = document.createElement('div')
                     TestIcerigi.setAttribute('id','TestIcerigi')
 
-                    for(var x = 1; x<=ParseQuestionData.length;x++){
+                    for(var x = 1; x<ParseQuestionData.length;x++){
                         var Card = document.createElement('div')
                         Card.setAttribute('class','card mt-4')
                         Card.id = "soru"+x
@@ -227,52 +279,7 @@ TestOlustur.addEventListener('submit',function(e){
 
 
 
-                        // SideBar
-                        var SideBarDiv = document.createElement('div')
-                        SideBarDiv.setAttribute('class','sidenav')
-                        SideBarDiv.setAttribute('id','sidebarDiv')
                         
-                        var TimeDiv = document.createElement("div")
-                        TimeDiv.setAttribute('id','chronoExample')
-
-                        var TimeText = document.createElement('div')
-                        TimeText.setAttribute('class','values')
-                        TimeText.innerHTML = "00:00:00"
-
-                        var TimeButton = document.createElement('button')
-                        TimeButton.setAttribute('class','startButton')
-                        TimeButton.innerHTML = "Start"
-                        var timer = new Timer();
-                        timer.addEventListener('started', function (e) {
-                            $('#chronoExample .values').html(timer.getTimeValues().toString());
-                        });
-                        
-
-                        TimeDiv.appendChild(TimeText)
-                        TimeDiv.appendChild(TimeButton)
-                        SideBarDiv.appendChild(TimeDiv)
-
-
-                        for(var a = 1;a< ParseQuestionData.length;a++){
-                            var pagelink = document.createElement('a')
-                            pagelink.setAttribute('href','#soru'+a)
-                            pagelink.innerHTML= a
-                            pagelink.setAttribute('title',a+". Soru'ya Git")
-                            
-                                if((a-1)%5 == 0){
-                                    var AddBr = document.createElement('br')
-                                    SideBarDiv.appendChild(AddBr)
-                                }
-                            
-
-                            SideBarDiv.appendChild(pagelink)
-
-                            
-
-                            // TODO Scroll Animate Eklencek
-                        }
-
-
                         
                         var collapseDiv = document.createElement('div')
                         collapseDiv.setAttribute('class','collapse')
@@ -328,9 +335,6 @@ TestOlustur.addEventListener('submit',function(e){
                         RadioGroup.appendChild(label6)
                         
 
-                        
-
-                        document.body.appendChild(SideBarDiv)
                         YeniTest.append(TestIcerigi)
                         TestIcerigi.append(Card)
                         CardBody.appendChild(RadioGroup)
@@ -338,20 +342,9 @@ TestOlustur.addEventListener('submit',function(e){
                         Card.appendChild(CardBody)
                         Card.appendChild(CardFooterCollapseButton)
                         Card.appendChild(collapseDiv)
-
-
-                        
-
-                        var timer = new Timer();
-                        timer.start();
-
-                        timer.addEventListener('secondsUpdated', function (e) {
-                            $('#basicUsage').html(timer.getTimeValues().toString());
-                        });
-
-
-                        
                     }
+                    document.body.appendChild(SideBarDiv)
+
                 }
                 else{
                     swal({
@@ -362,10 +355,11 @@ TestOlustur.addEventListener('submit',function(e){
                       });
     
                 }
+
             },error:function(){
     
             }
         })
     }
     
-})
+})*/

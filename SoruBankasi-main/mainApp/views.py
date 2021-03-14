@@ -147,28 +147,6 @@ def SolveQuestion(request):
             return JsonResponse(data,safe =False)
 
 
-        elif DataType == "CreateExam":
-            Exam = request.POST.get('Exam')
-            Lesson = request.POST.get('Lesson')
-            Topic = request.POST.get('Topic')
-            Length = request.POST.get('TestLength')
-            
-
-            examid= exams.objects.get(examname = Exam)
-            Lessonid = categories.objects.get(ders=Lesson,exams_id = examid.id)
-            Topicid = topics.objects.get(topicname=Topic,categories_id = Lessonid.id,exams_id = examid.id)
-
-            AllQuestion = questions.objects.filter(exams_id = examid.id,topics_id = Topicid.id,categories_id = Lessonid.id)
-            sendQuestionList = []
-            i = 0
-            while i<= int(Length):
-                Random = random.randint(0,AllQuestion.count()-1)
-                sendQuestionList.append(AllQuestion[Random])
-                i+=1
-            
-            data = serializers.serialize('json', sendQuestionList)
-            return JsonResponse(data,safe = False)
-
     examsData = exams.objects.all()
 
     context = {
@@ -180,7 +158,13 @@ def SolveQuestion(request):
 
 @login_required(login_url='/login/')
 def testResolve(request):
-    return render(request,"AppTemplate/TestArayuz.html") 
+    if request.method == "POST":
+
+        # TODO: Sorular çekilecek
+        context ={
+            'data': sendQuestionList
+        }
+    return render(request,"AppTemplate/TestArayuz.html",context) 
 
 
 @login_required(login_url='/login/')
