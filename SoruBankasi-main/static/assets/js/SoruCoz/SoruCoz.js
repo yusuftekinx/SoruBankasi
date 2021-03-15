@@ -72,6 +72,7 @@ function DersSecimi(){
             select.appendChild(staticOption2)
             for(var x = 0;x<ParseData.length; x++){
                 var option = document.createElement('option')
+                
                 option.value = ParseData[x].fields.topicname
                 option.innerHTML = ParseData[x].fields.topicname
                 option.id = ParseData[x].pk
@@ -107,34 +108,21 @@ TestOlustur.addEventListener('submit',function(e){
     }
     else{
         SubmitButton.innerHTML = "<div class = 'spinner-border spinner-border-sm' role = 'status'><span class = 'sr-only'>Loading ...</span></div>"
-        
-        setTimeout(function(){
-            SubmitButton.innerHTML = "Uygula"
-            swal({
-                title:'Başarılı',
-                text: "Lütfen bekle,seni test sayfasına yönlendiriyoruz",
-                icon: "success",
-                button: "Tamam",
-            })
-        },3000)
-        
-        /*$.ajax({
+        $.ajax({
             type: 'POST',
-            url : '/solveQuestion/',
+            url : '/testResolve/',
             data:{
-                Exam:Exam,
-                Lesson:Lesson,
-                Topic:Topic,
+                Exam:$("#SinavTuru").children(':selected').attr('id'),
+                Lesson:$("#DersTuru").children(':selected').attr('id'),
+                Topic:$("#KonuTuru").children(':selected').attr('id'),
                 TestLength:$('#TestUzunluk').children(':selected').attr('value'),
                 type:'CreateExam',
                 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
             },success:function(data){
 
-                var sn = 0;
-                var dk = 0;
-
                 SubmitButton.innerHTML = "Uygula"
-                ParseQuestionData = JSON.parse(data)
+                
+                /*
                 if(ParseQuestionData.length > 0){
                     YeniTest.fadeIn(300);
 

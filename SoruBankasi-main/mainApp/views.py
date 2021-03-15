@@ -160,11 +160,32 @@ def SolveQuestion(request):
 def testResolve(request):
     if request.method == "POST":
 
-        # TODO: Sorular çekilecek
+        SinavId = request.POST.get('Exam')
+        DersId = request.POST.get('Lesson')
+        KonuId = request.POST.get('Topic')
+        TestUzunluk = request.POST.get("TestLength")
+
+        """questionlist = []
+        CreatedQuestion = questions.objects.filter(categories_id = DersId,exams_id = SinavId,topics_id = KonuId)#Filtreye uygun sorular
+        
+        if(CreatedQuestion.count() < int(TestUzunluk)):
+            print("Veritabanında yeteri kadar soru yok")
+        
+        else:
+            for i in range(int(TestUzunluk)):
+                randomNumber = random.randint(0,CreatedQuestion.count()-1)
+                questionlist.append(CreatedQuestion[randomNumber])
+                i+=1
+
+        
+        print("----------Liste Oluştu --------------")
+        print(questionlist)
+
+
         context ={
-            'data': sendQuestionList
-        }
-    return render(request,"AppTemplate/TestArayuz.html",context) 
+            'questions':questionlist            
+        }"""
+    return render(request,"AppTemplate/TestArayuz.html") 
 
 
 @login_required(login_url='/login/')
