@@ -18,6 +18,7 @@ urlpatterns = [
     path('AddBlog/',views.AddBlog,name = "AddBlog"),
     path('myblog/',views.Myblog,name = "MyBlog"),
     path('myblog/<user>/<id>/',views.CategoryFilter),
+    path('calendar/', views.calendar, name="calendar"),
 
     
 

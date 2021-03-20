@@ -119,6 +119,12 @@ def home(request):
 def profile(request):
     return render(request,"AppTemplate/profile.html")
 
+
+@login_required(login_url='/login/')
+def calendar(request):
+    return render(request,"AppTemplate/calendar.html")
+
+
 @login_required(login_url='/login/')
 def addquestion(request):
     return render(request,"AppTemplate/addQuestion.html")
