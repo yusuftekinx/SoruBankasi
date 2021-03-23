@@ -26,12 +26,11 @@ function SınavSecimi(){
             var staticOption =  document.createElement('option')
             staticOption.innerHTML = "Ders Seç"
             select.appendChild(staticOption)
-            
             for(var x = 0;x<ParseData.length; x++){
                 var option = document.createElement('option')
-                option.value = ParseData[x].fields.ders
+                option.setAttribute("value",ParseData[x].pk)
                 option.innerHTML = ParseData[x].fields.ders
-                option.id = ParseData[x].pk
+                option.setAttribute("id",ParseData[x].pk); 
                 select.appendChild(option)
             }
             NewSelect.append(select)
@@ -73,9 +72,8 @@ function DersSecimi(){
             for(var x = 0;x<ParseData.length; x++){
                 var option = document.createElement('option')
                 
-                option.value = ParseData[x].fields.topicname
+                option.setAttribute("value",ParseData[x].pk) 
                 option.innerHTML = ParseData[x].fields.topicname
-                option.id = ParseData[x].pk
                 select.appendChild(option)
             }
             NewSelect2.append(select)

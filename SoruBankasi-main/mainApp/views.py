@@ -161,37 +161,39 @@ def SolveQuestion(request):
 
     return render(request,"AppTemplate/SoruCoz.html",context)
 
-
 @login_required(login_url='/login/')
-def testResolve(request):
+def testhazirla(request):
+    questionlist = []
+    # TODO: Sayfa yenilendiğinde sorular değişiyor.Bunu engellemeliyiz.
     if request.method == "POST":
-
-        SinavId = request.POST.get('Exam')
-        DersId = request.POST.get('Lesson')
-        KonuId = request.POST.get('Topic')
-        TestUzunluk = request.POST.get("TestLength")
-
-        """questionlist = []
-        CreatedQuestion = questions.objects.filter(categories_id = DersId,exams_id = SinavId,topics_id = KonuId)#Filtreye uygun sorular
-        
-        if(CreatedQuestion.count() < int(TestUzunluk)):
-            print("Veritabanında yeteri kadar soru yok")
-        
+        if(len(questionlist) > 0):
+            context = {
+                'question':questionlist
+            }
         else:
-            for i in range(int(TestUzunluk)):
-                randomNumber = random.randint(0,CreatedQuestion.count()-1)
-                questionlist.append(CreatedQuestion[randomNumber])
-                i+=1
+            SinavBaslik = request.POST.get('Sinav')
+            SinavId = exams.objects.get(examname = SinavBaslik)
+            DersId = request.POST.get('Ders')
+            KonuId = request.POST.get('Konu')
+            TestUzunluk = request.POST.get("TestUzunluk")
+            CreatedQuestion = questions.objects.filter(categories_id = DersId,exams_id = SinavId.id,topics_id = KonuId)#Filtreye uygun sorular
+            
+            if(CreatedQuestion.count() < int(TestUzunluk)):
+                print("Veritabanında yeteri kadar soru yok")
+            
+            else:
+                for i in range(int(TestUzunluk)):
+                    randomNumber = random.randint(0,CreatedQuestion.count()-1)
+                    questionlist.append(CreatedQuestion[randomNumber])
+                    i+=1
 
-        
-        print("----------Liste Oluştu --------------")
-        print(questionlist)
-
-
-        context ={
-            'questions':questionlist            
-        }"""
-    return render(request,"AppTemplate/TestArayuz.html") 
+            
+            context ={
+                'questions':questionlist            
+            }
+    else:
+        return HttpResponse('Öncelikle Test Oluşturulması gerekemektedir.')
+    return render(request,"AppTemplate/TestArayuz.html",context) 
 
 
 @login_required(login_url='/login/')

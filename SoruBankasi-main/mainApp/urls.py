@@ -13,12 +13,12 @@ urlpatterns = [
     path('profile/',views.profile,name = "profile"),
     path('addquestion/',views.addquestion,name = "addQuestion"),
     path('solveQuestion/',views.SolveQuestion,name = "solveQuestion"),
-    path('testResolve/',views.testResolve,name = "testResolve"),
     path('blogs/',views.Blog,name = "Blog"),
     path('AddBlog/',views.AddBlog,name = "AddBlog"),
     path('myblog/',views.Myblog,name = "MyBlog"),
     path('myblog/<user>/<id>/',views.CategoryFilter),
     path('calendar/', views.calendar, name="calendar"),
+    path('testhazirla/',views.testhazirla,name = "testhazirla")
 
     
 

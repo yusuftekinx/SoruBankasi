@@ -43,10 +43,10 @@
           </div>
           </div>
           <div class= "col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-            {% for i in data %}
-              <h1>{{data.i}}</h1>
-            {% endfor %}
-            
+              {% for question in questions %}
+                  {{question.SoruMetni}}
+                  <br>
+              {% endfor %}
           </div>
         </div>
         
