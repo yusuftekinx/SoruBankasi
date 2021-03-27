@@ -12,7 +12,7 @@
   <body>
     {% block content %}
     <div class="container pl-5 pt-3">
-      <form id="TestOlustur" method = "POST" action = "{% url 'testhazirla' %}">
+      <form id="TestOlustur" method = "GET" action = "{% url 'testhazirla' %}" target="blank">
         {% csrf_token %}
         <div class="row">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-3">
@@ -71,6 +71,7 @@
                 class="btn form-control bg-dark h6"
                 id = "SubmitButton"
                 value = "Uygula"
+                target = "blank"
                 >
             </div>
           </div>

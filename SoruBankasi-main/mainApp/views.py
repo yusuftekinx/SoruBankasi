@@ -13,6 +13,9 @@ import random
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 
+questionlist = []
+
+
 def index(request):
     categoriess = categories.objects.all()
     examss = exams.objects.all()
@@ -163,19 +166,21 @@ def SolveQuestion(request):
 
 @login_required(login_url='/login/')
 def testhazirla(request):
-    questionlist = []
     # TODO: Sayfa yenilendiğinde sorular değişiyor.Bunu engellemeliyiz.
-    if request.method == "POST":
+    if request.method == "GET":
         if(len(questionlist) > 0):
+            print("ZATEN SORU VAR")
             context = {
-                'question':questionlist
+                'questions':questionlist
             }
+
         else:
-            SinavBaslik = request.POST.get('Sinav')
+            print("SORU YOK")
+            SinavBaslik = request.GET.get('Sinav')
             SinavId = exams.objects.get(examname = SinavBaslik)
-            DersId = request.POST.get('Ders')
-            KonuId = request.POST.get('Konu')
-            TestUzunluk = request.POST.get("TestUzunluk")
+            DersId = request.GET.get('Ders')
+            KonuId = request.GET.get('Konu')
+            TestUzunluk = request.GET.get("TestUzunluk")
             CreatedQuestion = questions.objects.filter(categories_id = DersId,exams_id = SinavId.id,topics_id = KonuId)#Filtreye uygun sorular
             
             if(CreatedQuestion.count() < int(TestUzunluk)):
@@ -191,8 +196,8 @@ def testhazirla(request):
             context ={
                 'questions':questionlist            
             }
-    else:
-        return HttpResponse('Öncelikle Test Oluşturulması gerekemektedir.')
+    elif request.method == "POST":
+        return HttpResponse('POST İsTEK geldi')
     return render(request,"AppTemplate/TestArayuz.html",context) 
 
 
